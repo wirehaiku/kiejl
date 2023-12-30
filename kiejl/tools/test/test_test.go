@@ -11,10 +11,10 @@ import (
 
 func TestAssertErr(t *testing.T) {
 	// setup
-	err := fmt.Errorf("test %q", "path")
+	err := fmt.Errorf("test %s", "err")
 
 	// success
-	AssertErr(t, err, "test %q")
+	AssertErr(t, err, "test .*")
 }
 
 func TestAssertFile(t *testing.T) {
@@ -42,6 +42,6 @@ func TestFile(t *testing.T) {
 	// success
 	path := File(t, "alpha.extn")
 	bytes, err := os.ReadFile(path)
-	assert.Equal(t, MockFiles["alpha.extn"], string(bytes))
+	assert.Equal(t, "Alpha.\n", string(bytes))
 	assert.NoError(t, err)
 }
