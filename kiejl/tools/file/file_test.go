@@ -2,6 +2,7 @@ package file
 
 import (
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -30,8 +31,7 @@ func TestCreate(t *testing.T) {
 func TestDelete(t *testing.T) {
 	// setup
 	path := test.File(t, "alpha.extn")
-	dire := filepath.Dir(path)
-	dest := filepath.Join(dire, "alpha.deleted")
+	dest := strings.Replace(path, ".extn", ".deleted", 1)
 
 	// success
 	err := Delete(path)
