@@ -2,8 +2,10 @@
 package test
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,6 +15,13 @@ import (
 var MockFiles = map[string]string{
 	"alpha.extn": "Alpha.\n",
 	"bravo.extn": "Bravo.\n",
+}
+
+// AssertErr asserts an error's message matches a regular expression.
+func AssertErr(t *testing.T, err error, regx string) {
+	regx = fmt.Sprintf("^%s$", regx)
+	regx = strings.Replace(regx, "%q", `".*"`, -1)
+	assert.Regexp(t, regx, err.Error())
 }
 
 // AssertFile asserts the contents of a file from a string.

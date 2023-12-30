@@ -1,12 +1,21 @@
 package test
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestAssertErr(t *testing.T) {
+	// setup
+	err := fmt.Errorf("test %q", "path")
+
+	// success
+	AssertErr(t, err, "test %q")
+}
 
 func TestAssertFile(t *testing.T) {
 	// setup
