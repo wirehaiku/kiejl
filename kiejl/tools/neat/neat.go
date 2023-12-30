@@ -13,13 +13,6 @@ func Body(body string) string {
 
 }
 
-// Dire returns a clean directory path string.
-func Dire(dire string) string {
-	dire = strings.TrimSpace(dire)
-	dire, _ = filepath.Abs(dire)
-	return dire
-}
-
 // Extn returns a clean file extension string.
 func Extn(extn string) string {
 	extn = strings.TrimSpace(extn)
@@ -31,4 +24,11 @@ func Extn(extn string) string {
 func Name(name string) string {
 	name = strings.TrimSpace(name)
 	return strings.ToLower(name)
+}
+
+// Path returns a clean file path string.
+func Path(dire string) string {
+	dire = strings.TrimSpace(dire)
+	dire, _ = filepath.Abs(dire)
+	return dire
 }
