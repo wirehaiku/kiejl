@@ -102,6 +102,31 @@ func TestRename(t *testing.T) {
 	test.AssertErr(t, err, "cannot rename .*: .*")
 }
 
+func TestSearch(t *testing.T) {
+	// setup
+	path := test.File(t, "alpha.extn")
+
+	// success - true
+	ok, err := Search(path, "alph")
+	assert.True(t, ok)
+	assert.NoError(t, err)
+
+	// success - false
+	ok, err = Search(path, "nope")
+	assert.False(t, ok)
+	assert.NoError(t, err)
+
+	// failure - file does not exist
+	ok, err = Search("/nope", "nope")
+	assert.False(t, ok)
+	test.AssertErr(t, err, "cannot search .*: file does not exist")
+
+	// failure - other error
+	ok, err = Search("/", "nope")
+	assert.False(t, ok)
+	test.AssertErr(t, err, "cannot search .*: .*")
+}
+
 func TestUpdate(t *testing.T) {
 	// setup
 	path := test.File(t, "alpha.extn")

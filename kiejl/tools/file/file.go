@@ -78,6 +78,22 @@ func Rename(path, name string) error {
 	return nil
 }
 
+// Search returns true if a file's body contains a substring.
+func Search(path, text string) (bool, error) {
+	if !Exists(path) {
+		return false, fmt.Errorf("cannot search %q: file does not exist", path)
+	}
+
+	bytes, err := os.ReadFile(path)
+	if err != nil {
+		return false, fmt.Errorf("cannot search %q: %w", path, err)
+	}
+
+	body := strings.ToLower(string(bytes))
+	text = strings.ToLower(text)
+	return strings.Contains(body, text), nil
+}
+
 // Update overwrites an existing file's body with a string.
 func Update(path, body string, mode os.FileMode) error {
 	if !Exists(path) {
