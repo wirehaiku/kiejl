@@ -38,6 +38,16 @@ func TestJoin(t *testing.T) {
 	assert.Equal(t, "/dire/name.extn", path)
 }
 
+func TestMatch(t *testing.T) {
+	// success - true
+	ok := Match("/dire/name.extn", "NAME")
+	assert.True(t, ok)
+
+	// success - false
+	ok = Match("/dire/name.extn", "NOPE")
+	assert.False(t, ok)
+}
+
 func TestName(t *testing.T) {
 	// success
 	name := Name("/dire/name.extn")
