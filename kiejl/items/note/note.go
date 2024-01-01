@@ -17,7 +17,8 @@ type Note struct {
 
 // New returns a new Note.
 func New(path string, mode os.FileMode) *Note {
-	return &Note{neat.Path(path), mode}
+	path = neat.Path(path)
+	return &Note{path, mode}
 }
 
 // Delete renames the Note to a ".deleted" extension in the same directory.

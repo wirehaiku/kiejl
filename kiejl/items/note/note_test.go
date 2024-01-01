@@ -15,10 +15,8 @@ func tNote(t *testing.T) *Note {
 }
 
 func TestNew(t *testing.T) {
-	// setup
-	note := tNote(t)
-
 	// success
+	note := tNote(t)
 	assert.Contains(t, note.Path, "alpha.extn")
 	assert.Equal(t, os.FileMode(0666), note.Mode)
 }
