@@ -17,6 +17,16 @@ func TestCheck(t *testing.T) {
 	test.AssertErr(t, err, "not enough arguments")
 }
 
+func TestDefault(t *testing.T) {
+	// success - given argument
+	elem := Default([]string{"one"}, 0, "default")
+	assert.Equal(t, "one", elem)
+
+	// success - default argument
+	elem = Default([]string{"one"}, 1, "default")
+	assert.Equal(t, "default", elem)
+}
+
 func TestParse(t *testing.T) {
 	// success - no arguments
 	name, elems := Parse(nil)

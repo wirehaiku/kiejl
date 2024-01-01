@@ -12,6 +12,15 @@ func Check(elems []string, size int) error {
 	return nil
 }
 
+// Default returns an element from an argument slice, or a default string.
+func Default(elems []string, indx int, dflt string) string {
+	if len(elems) > indx {
+		return elems[indx]
+	}
+
+	return dflt
+}
+
 // Parse returns a Task name and argument slice from an argument slice.
 func Parse(elems []string) (string, []string) {
 	switch len(elems) {
