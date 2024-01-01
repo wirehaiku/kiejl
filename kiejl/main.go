@@ -9,7 +9,6 @@ import (
 	"github.com/wirehaiku/kiejl/kiejl/items/book"
 	"github.com/wirehaiku/kiejl/kiejl/tasks"
 	"github.com/wirehaiku/kiejl/kiejl/tools/clui"
-	"github.com/wirehaiku/kiejl/kiejl/tools/path"
 )
 
 // try prints a non-nil error and exits.
@@ -23,10 +22,10 @@ func try(err error) {
 // main runs the main Kiejl program.
 func main() {
 	// Collect configuration variables.
-	dire, err := path.Evar("KIEJL_DIR")
+	dire, err := clui.Evar("KIEJL_DIR")
 	try(err)
 
-	extn, err := path.Evar("KIEJL_EXT")
+	extn, err := clui.Evar("KIEJL_EXT")
 	try(err)
 
 	// Collect and parse arguments and Task.

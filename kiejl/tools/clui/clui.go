@@ -1,7 +1,11 @@
 // Package clui implements command-line user interface functions.
 package clui
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"strings"
+)
 
 // Check returns an error if an argument slice is less than an integer.
 func Check(elems []string, size int) error {
@@ -19,6 +23,22 @@ func Default(elems []string, indx int, dflt string) string {
 	}
 
 	return dflt
+}
+
+// Evar returns an environment variable by name, or an error.
+func Evar(name string) (string, error) {
+	name = strings.ToUpper(name)
+	data, ok := os.LookupEnv(name)
+	data = strings.TrimSpace(data)
+
+	switch {
+	case !ok:
+		return "", fmt.Errorf("environment variable %q does not exist", name)
+	case data == "":
+		return "", fmt.Errorf("environment variable %q is blank", name)
+	default:
+		return data, nil
+	}
 }
 
 // Parse returns a Task name and argument slice from an argument slice.

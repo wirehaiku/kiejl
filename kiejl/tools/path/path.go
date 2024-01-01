@@ -2,8 +2,6 @@
 package path
 
 import (
-	"fmt"
-	"os"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -12,22 +10,6 @@ import (
 // Dire returns a path's parent directory.
 func Dire(path string) string {
 	return filepath.Dir(path)
-}
-
-// Evar returns an environment variable by name, or an error.
-func Evar(name string) (string, error) {
-	name = strings.ToUpper(name)
-	data, ok := os.LookupEnv(name)
-	data = strings.TrimSpace(data)
-
-	switch {
-	case !ok:
-		return "", fmt.Errorf("environment variable %q does not exist", name)
-	case data == "":
-		return "", fmt.Errorf("environment variable %q is blank", name)
-	default:
-		return data, nil
-	}
 }
 
 // Extn returns a path's file extension with a leading dot.
