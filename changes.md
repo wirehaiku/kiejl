@@ -1,7 +1,8 @@
 # Changes
 
 ## [Unreleased]
-- Nothing yet.
+### Added
+- New commands: `list`.
 
 ## [0.0.0] · 2023-12-30
 ### Added
