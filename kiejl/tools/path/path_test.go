@@ -1,6 +1,7 @@
 package path
 
 import (
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -12,6 +13,27 @@ func TestDire(t *testing.T) {
 	// success
 	dire := Dire("/dire/name.extn")
 	assert.Equal(t, "/dire", dire)
+}
+
+func TestEvar(t *testing.T) {
+	// setup
+	os.Setenv("TEST", "test\n")
+	os.Setenv("BLANK", "\n")
+
+	// success
+	evar, err := Evar("test")
+	assert.Equal(t, "test", evar)
+	assert.NoError(t, err)
+
+	// failure - variable does not exist
+	evar, err = Evar("nope")
+	assert.Empty(t, evar)
+	test.AssertErr(t, err, "environment variable .* does not exist")
+
+	// failure - variable is blank
+	evar, err = Evar("blank")
+	assert.Empty(t, evar)
+	test.AssertErr(t, err, "environment variable .* is blank")
 }
 
 func TestExtn(t *testing.T) {
